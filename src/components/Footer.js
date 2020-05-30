@@ -14,33 +14,33 @@ class Footer extends Component{
     {
         return(
             <div id="Footer">
-                <div class="container">
-                    <div class="row mt-5 pt-5">
-                    <div class="col-lg-12 mb-4 text-center my-4">
-                        <span class="fa-stack fa-2x icon">
+                <div className="container">
+                    <div className="row mt-5 pt-5">
+                    <div className="col-lg-12 mb-4 text-center my-4">
+                        <span className="fa-stack fa-2x icon">
                         <a href="https://www.linkedin.com/in/utkarsh-agrawal-622b5b16b/" target="_blank">
-                            <i class="fa fa-stack-2x icon-background"></i>
-                            <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            <i className="fa fa-stack-2x icon-background"></i>
+                            <i className="fab fa-linkedin-in fa-stack-1x"></i>
                         </a>
                         </span>
 
-                        <span class="fa-stack fa-2x icon">
+                        <span className="fa-stack fa-2x icon">
                         <a href="https://github.com/UtkarshAgrawalDTU/" target="_blank">
-                            <i class="fa fa fa-stack-2x icon-background"></i>
-                            <i class="fab fa-github fa-stack-1x"></i>
+                            <i className="fa fa fa-stack-2x icon-background"></i>
+                            <i className="fab fa-github fa-stack-1x"></i>
                         </a>
                         </span>
 
-                        <span class="icon fa-stack fa-2x icon">
+                        <span className="icon fa-stack fa-2x icon">
                         <a href="mailto:agrawal.utkarsh8@gmail.com" target="_blank">
-                            <i class="fa fa-stack-2x icon-background"></i>
-                            <i class="far fa-envelope fa-stack-1x"></i>
+                            <i className="fa fa-stack-2x icon-background"></i>
+                            <i className="far fa-envelope fa-stack-1x"></i>
                         </a>
                         </span>
                         <br />
                     </div>
-                    <div class="col-lg-12 text-center">
-                        <p class="copyright-text">
+                    <div className="col-lg-12 text-center">
+                        <p className="copyright-text">
                         Handcrafted by me @<a><b>Utkarsh Agrawal</b></a>
                         </p>
                     </div>

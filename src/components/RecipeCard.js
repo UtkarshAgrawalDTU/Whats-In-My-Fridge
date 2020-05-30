@@ -1,27 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import './RecipeCard.css'
+
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 345,
-  },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -43,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function RecipeReviewCard(props) {
+export default function RecipeCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -51,60 +42,58 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
 
+
+
+  const generateKey = (pre) => {
+    return `${ pre }_${ new Date().getTime() }`;
+}
+
   const dir = props.values.directions.split("**")
-
-
+  const modalid = "#" + props.values.id
+  const points = dir.map(item => <Typography key = {generateKey(item)} variant="body2" color="textSecondary" component="p">{item}</Typography>)
   return (
-    <Card className={classes.root}>
-    <CardActionArea>
-    <CardMedia
-        className={classes.media}
-        image={props.values.img_url}
-        title={props.values.name}
-      />
-      <CardHeader
-        title={props.values.name}
-        subheader={props.values.author}
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">Prepare Time : {props.values.prepare_time}</Typography>
-        <Typography variant="body2" color="textSecondary" component="p">Cook Time : {props.values.cook_time}</Typography> 
-        <Typography variant="body2" color="textSecondary" component="p">Total Time : {props.values.total_time}</Typography>  
-      </CardContent>
-    </CardActionArea>
-    
 
-      <CardActions>
-        <Button className = "ml-2"size="small" color="primary" type="button" data-toggle="modal" data-target="#exampleModalCenter">
-          Directions
-        </Button>
-      </CardActions>
+      <div className="card-container">
 
+      <div className="card">
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Directions</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {dir.map(item => <Typography paragraph>{item}</Typography>)}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            </div>
+        <div className="front">
+          <CardActionArea>
+            <CardMedia
+                className={classes.media}
+                image={props.values.img_url}
+                title={props.values.name}
+              />
+              <CardHeader
+                title={props.values.name}
+                subheader={props.values.author}
+              />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">Prepare Time : {props.values.prepare_time}</Typography>
+                <Typography variant="body2" color="textSecondary" component="p">Cook Time : {props.values.cook_time}</Typography> 
+                <Typography variant="body2" color="textSecondary" component="p">Total Time : {props.values.total_time}</Typography>  
+              </CardContent>
+            </CardActionArea>
+            
+
+              <CardActions>
+                <Button className = "ml-2" size="small" color="primary" type="button" data-toggle="modal" data-target={modalid}>
+                  Directions
+                </Button>
+            </CardActions>
         </div>
+        
+        <div className="back">
+
+          <CardContent>
+            {points}
+          </CardContent>
+          
+        </div>
+      
+      
+      
+      </div>
     </div>
-
-
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        </Typography>
-      </CardContent>
-    </Card>
   );
 }

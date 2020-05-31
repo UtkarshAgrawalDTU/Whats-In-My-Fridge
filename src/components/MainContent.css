@@ -23,13 +23,13 @@ img {
     transition: all 0.15s;
 }
 
-a.button2:hover{
+b.button2:hover{
     text-decoration: none;
     color:rgb(58, 50, 50);
     border-color:rgb(63, 58, 58);
 }
 
-a.button2:active{
+b.button2:active{
     color:rgb(70, 49, 49);
     border-color:rgb(75, 48, 48);
 }

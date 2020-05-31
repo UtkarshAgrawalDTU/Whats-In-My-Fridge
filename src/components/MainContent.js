@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./MainContent.css"
 
 class MainContent extends Component{
@@ -24,7 +19,7 @@ class MainContent extends Component{
                 <h4 className="mb-5 pb-3 pt-2 subheading">Just provide us with the ingredients available at your home, and we will suggest you with easy to cook food recipes!</h4>
                 
                 <Link to = "/recipe">
-                    <a className="button2">Try Out Now</a>
+                    <b className="button2">Try Out Now</b>
                 </Link>
                 
             </div>

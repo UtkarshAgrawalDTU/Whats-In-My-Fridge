@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import Chip from '@material-ui/core/Chip'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Header from './Header'
@@ -7,19 +6,6 @@ import Footer from './Footer'
 import RecipeCard from './RecipeCard'
 import './RecipeFinder.css'
 
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: '25ch',
-    },
-  }));
 
 
 class RecipeFinder extends Component{
@@ -68,7 +54,7 @@ class RecipeFinder extends Component{
 
         const ing_str = this.state.inputIngredients.join()
 
-        if(ing_str.length == 0)
+        if(ing_str.length === 0)
         {
             fetch("https://myfridgeapi.herokuapp.com/myfridge/")
             .then(response => response.json())
@@ -162,7 +148,7 @@ class RecipeFinder extends Component{
 
 
                         <div className = "button my-4">
-                            <a className="button2" onClick = {this.apiCall}>Search Now !</a> 
+                            <a href = "" className="button2" onClick = {this.apiCall}>Search Now !</a> 
                         </div>
                         
 

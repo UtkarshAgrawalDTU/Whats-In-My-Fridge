@@ -7,6 +7,8 @@ import Footer from './Footer'
 import RecipeCard from './RecipeCard'
 import './RecipeFinder.css'
 
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -18,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   }));
-
-
 
 
 class RecipeFinder extends Component{
@@ -41,6 +41,8 @@ class RecipeFinder extends Component{
 
     }
 
+
+
     componentDidMount()
     {
         this.setState({
@@ -55,6 +57,7 @@ class RecipeFinder extends Component{
         }))
         
     }
+
 
 
     apiCall()
@@ -88,6 +91,7 @@ class RecipeFinder extends Component{
         }
     }
 
+
     addIngredient(event){
 
         const newInputIng = this.state.inputIngredients.concat(this.state.one_ing)
@@ -96,6 +100,8 @@ class RecipeFinder extends Component{
         })
 
     }
+
+
 
     removeIngredient(label){
         
@@ -123,9 +129,10 @@ class RecipeFinder extends Component{
     }
 
 
+
+
     render()
     {
-
 
         const recipeObj = this.state.recipes.map(item => <div key = {item.id} className = "my-2 col-lg-6"><RecipeCard key={item.id} values = {item} /></div>)
         const ChipObj = this.state.inputIngredients.map(item => <Chip key={item} label = {item} onDelete = {() => this.removeIngredient(item)}/> )
@@ -169,6 +176,8 @@ class RecipeFinder extends Component{
             )
         }
 
+
+        
         return(
             <div className = "RecipeFinder"> 
                 

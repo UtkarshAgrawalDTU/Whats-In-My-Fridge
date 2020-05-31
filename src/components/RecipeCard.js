@@ -9,7 +9,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
-import './RecipeCard.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -92,9 +91,6 @@ export default function RecipeCard(props) {
           </CardContent>
           
         </div>
-      
-      
-      
       </div>
     </div>
   );

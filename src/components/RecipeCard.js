@@ -69,6 +69,8 @@ export default function RecipeCard(props) {
                 subheader={props.values.author}
               />
               <CardContent>
+
+                <Typography variant="body2" color="textSecondary" component="p">Ingredients : {props.values.ingredients_list}</Typography>
                 <Typography variant="body2" color="textSecondary" component="p">Prepare Time : {props.values.prepare_time}</Typography>
                 <Typography variant="body2" color="textSecondary" component="p">Cook Time : {props.values.cook_time}</Typography> 
                 <Typography variant="body2" color="textSecondary" component="p">Total Time : {props.values.total_time}</Typography>  

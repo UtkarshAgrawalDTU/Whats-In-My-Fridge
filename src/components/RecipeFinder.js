@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Chip from '@material-ui/core/Chip'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Header from './Header'
 import Footer from './Footer'
 import RecipeCard from './RecipeCard'
-
+import './RecipeFinder.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,8 +30,14 @@ class RecipeFinder extends Component{
         this.state = {
             loading : false,
             recipes : [],
-            inputIngredients : []
+            inputIngredients : [],
+            one_ing : ""
         }
+
+        this.apiCall = this.apiCall.bind(this)
+        this.oneIng = this.oneIng.bind(this)
+        this.addIngredient = this.addIngredient.bind(this)
+        this.removeIngredient = this.removeIngredient.bind(this)
 
     }
 
@@ -50,21 +57,117 @@ class RecipeFinder extends Component{
     }
 
 
-    render()
+    apiCall()
     {
-        console.log(this.state.recipes)
-        if(this.state.loading){
-            return(
-                <div>
-                    <Header />
-                    <h1>loading</h1>
-                    <Footer />
-                </div>
-                
-            )
+        this.setState({
+            loading : true
+        })
+
+        const ing_str = this.state.inputIngredients.join()
+
+        if(ing_str.length == 0)
+        {
+            fetch("https://myfridgeapi.herokuapp.com/myfridge/")
+            .then(response => response.json())
+            .then(data => this.setState({
+                loading : false,
+                recipes : data
+            }))
         }
 
+        else
+        {
+            const url1 = "https://myfridgeapi.herokuapp.com/myfridge/?ingredients="
+            const search_url = url1.concat(this.state.inputIngredients.join())
+            fetch(search_url)
+            .then(response => response.json(search_url))
+            .then(data => this.setState({
+                loading : false,
+                recipes : data
+            }))
+        }
+    }
+
+    addIngredient(event){
+
+        const newInputIng = this.state.inputIngredients.concat(this.state.one_ing)
+        this.setState({
+            inputIngredients : newInputIng
+        })
+
+    }
+
+    removeIngredient(label){
+        
+        const index = this.state.inputIngredients.indexOf(label);
+
+        if (index > -1) {
+            var newInputIng = []
+            newInputIng = this.state.inputIngredients
+            newInputIng.splice(index, 1);
+
+
+            this.setState({
+                inputIngredients : newInputIng
+            })
+        }
+
+    }
+
+
+    oneIng(event){
+
+        this.setState({
+            one_ing : event.target.value
+        })
+    }
+
+
+    render()
+    {
+
+
         const recipeObj = this.state.recipes.map(item => <div key = {item.id} className = "my-2 col-lg-6"><RecipeCard key={item.id} values = {item} /></div>)
+        const ChipObj = this.state.inputIngredients.map(item => <Chip key={item} label = {item} onDelete = {() => this.removeIngredient(item)}/> )
+        
+
+        if(this.state.loading){
+            return(
+                <div className = "RecipeFinder"> 
+                
+                    <Header />
+
+                    <div className = "container">
+
+                        <form>
+                            <div className="input-group input-group-lg mb-3">
+                                <input name="usering" value = {this.state.one_ing} onChange={this.oneIng} type="text" className="form-control" placeholder="Type your ingredients here" aria-label="Add your ingredients here" aria-describedby="basic-addon2" />
+                                <div className="input-group-append">
+                                    <button className="btn btn-outline-dark" type="button" onClick = {this.addIngredient}>Add</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+
+                        {ChipObj}
+                        
+                        <br></br>
+
+
+                        <div className = "button my-4">
+                            <a className="button2" onClick = {this.apiCall}>Search Now !</a> 
+                        </div>
+                        
+
+                        <div className = "button my-5">
+                            <CircularProgress />
+                        </div>
+                    </div>
+                    
+                    <Footer />
+            </div>
+            )
+        }
 
         return(
             <div className = "RecipeFinder"> 
@@ -75,25 +178,32 @@ class RecipeFinder extends Component{
 
                 <form>
                     <div className="input-group input-group-lg mb-3">
-                        <input type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                        <input name="usering" value = {this.state.one_ing} onChange={this.oneIng} type="text" className="form-control" placeholder="Type your ingredients here" aria-label="Add your ingredients here" aria-describedby="basic-addon2" />
                         <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button">Button</button>
+                            <button className="btn btn-outline-dark" type="button" onClick = {this.addIngredient}>Add</button>
                         </div>
                     </div>
                 </form>
                 
 
-                <Chip />
+                {ChipObj}
+                
+                <br></br>
 
-                    <div className = "row">
-                        {recipeObj}
-                    </div>
+
+                <div className = "button my-4">
+                    <a className="button2" onClick = {this.apiCall}>Search Now !</a> 
+                </div>
+                
+
+                <div className = "row">
+                    {recipeObj}
+                </div>
                     
                 </div>
                 
                 <Footer />
             </div>
-            
         )
     }
 

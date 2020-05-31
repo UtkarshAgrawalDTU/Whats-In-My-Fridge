@@ -148,7 +148,7 @@ class RecipeFinder extends Component{
 
 
                         <div className = "button my-4">
-                            <a href = "" className="button2" onClick = {this.apiCall}>Search Now !</a> 
+                            <a className="button2" onClick = {this.apiCall}>Search Now !</a> 
                         </div>
                         
 

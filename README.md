@@ -1,6 +1,6 @@
 # What's In My Fridge?
 > What's In My Fridge is a web application which allows users to find unique recipes based on the ingredients available at their home.
-> Check it out here : [What's In My Fridge?]()
+> Check it out here : [What's In My Fridge?](https://tender-jennings-1f85ec.netlify.app/)
 > The application consumes a REST API : [Github Repository](https://github.com/UtkarshAgrawalDTU/My-Fridge-API) [API Url](https://myfridgeapi.herokuapp.com) 
 
 
